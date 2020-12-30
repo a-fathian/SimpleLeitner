@@ -42,7 +42,7 @@ class TasksActivity : BaseActivity() {
     }
 
     override fun observeViewModel() {
-
+        // TODO
     }
 
 }
