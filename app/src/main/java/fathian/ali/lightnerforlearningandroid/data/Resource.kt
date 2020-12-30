@@ -1,19 +1,28 @@
 package fathian.ali.lightnerforlearningandroid.data
 
 // A generic class that contains data and status about loading this data.
-sealed class Resource<T>(
-        val data: T? = null,
-        val errorCode: Int? = null
-) {
-    class Success<T>(data: T) : Resource<T>(data)
-    class Loading<T>(data: T? = null) : Resource<T>(data)
-    class DataError<T>(errorCode: Int) : Resource<T>(null, errorCode)
+data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
 
-    override fun toString(): String {
-        return when (this) {
-            is Success<*> -> "Success[data=$data]"
-            is DataError -> "Error[exception=$errorCode]"
-            is Loading<T> -> "Loading"
+    companion object {
+
+        fun <T> success(data: T?): Resource<T> {
+            return Resource(Status.SUCCESS, data, null)
         }
+
+        fun <T> error(msg: String, data: T?): Resource<T> {
+            return Resource(Status.ERROR, data, msg)
+        }
+
+        fun <T> loading(data: T?): Resource<T> {
+            return Resource(Status.LOADING, data, null)
+        }
+
     }
+
+}
+
+enum class Status {
+    SUCCESS,
+    ERROR,
+    LOADING
 }
