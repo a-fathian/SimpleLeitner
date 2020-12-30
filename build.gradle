@@ -28,4 +28,6 @@ task clean(type: Delete) {
 ext {
     daggerVersion = '2.28.3'
     multiDexVersion = '2.0.1'
+    roomVersion = '2.2.6'
+    architectureLifecycleVersion = '2.2.0'
 }
