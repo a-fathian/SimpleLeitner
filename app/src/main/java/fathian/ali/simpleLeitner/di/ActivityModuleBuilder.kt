@@ -1,0 +1,14 @@
+package fathian.ali.simpleLeitner.di
+
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
+import fathian.ali.simpleLeitner.ui.component.TasksActivity
+
+@Suppress("unused")
+@Module
+abstract class ActivityModuleBuilder {
+
+    @ContributesAndroidInjector()
+    abstract fun contributeTasksActivity(): TasksActivity
+
+}
