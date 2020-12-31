@@ -2,6 +2,7 @@ package fathian.ali.lightnerforlearningandroid.ui.component
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import fathian.ali.lightnerforlearningandroid.R
 import fathian.ali.lightnerforlearningandroid.data.Resource
@@ -18,11 +19,11 @@ class TasksActivity : BaseActivity() {
 
     private lateinit var binding: TasksActivityBinding
 
-    @Inject
     lateinit var tasksListViewModel: TasksViewModel
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var tasksAdapter: TaskAdapter
 
     override fun initializeViewModel() {

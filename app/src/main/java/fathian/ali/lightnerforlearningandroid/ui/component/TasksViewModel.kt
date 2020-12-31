@@ -7,12 +7,10 @@ import androidx.lifecycle.viewModelScope
 import fathian.ali.lightnerforlearningandroid.data.Resource
 import fathian.ali.lightnerforlearningandroid.data.local.DatabaseHelper
 import fathian.ali.lightnerforlearningandroid.data.local.entity.Task
-import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withTimeout
-import java.lang.Exception
+import javax.inject.Inject
 
-class TasksViewModel(private val databaseHelper: DatabaseHelper): ViewModel() {
+class TasksViewModel @Inject constructor(private val databaseHelper: DatabaseHelper): ViewModel() {
 
     private val tasks = MutableLiveData<Resource<List<Task>>>()
 
