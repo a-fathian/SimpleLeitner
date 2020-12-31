@@ -1,7 +1,7 @@
 package fathian.ali.lightnerforlearningandroid.ui.component
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import fathian.ali.lightnerforlearningandroid.R
 import fathian.ali.lightnerforlearningandroid.data.Resource
@@ -11,7 +11,7 @@ import fathian.ali.lightnerforlearningandroid.databinding.TasksActivityBinding
 import fathian.ali.lightnerforlearningandroid.ui.ViewModelFactory
 import fathian.ali.lightnerforlearningandroid.ui.base.BaseActivity
 import fathian.ali.lightnerforlearningandroid.utils.observe
-import java.util.*
+import fathian.ali.lightnerforlearningandroid.utils.*
 import javax.inject.Inject
 
 class TasksActivity : BaseActivity() {
@@ -45,10 +45,10 @@ class TasksActivity : BaseActivity() {
     }
 
     override fun observeViewModel() {
-        observe(tasksListViewModel.getTasks(), ::handleRecipesList)
+        observe(tasksListViewModel.getTasks(), ::handleTaskList)
     }
 
-    private fun handleRecipesList(tasks: Resource<List<Task>>) {
+    private fun handleTaskList(tasks: Resource<List<Task>>) {
         when (tasks.status) {
             Status.LOADING -> showLoadingView()
             Status.SUCCESS -> tasks.data?.let { bindListData(tasks = it) }
@@ -57,6 +57,12 @@ class TasksActivity : BaseActivity() {
                 tasks.errorCode?.let { recipesListViewModel.showToastMessage(it) }
             }
         }
+    }
+
+    private fun showDataView(show: Boolean) {
+        binding.tvNoData.visibility = if (show) View.GONE else View.VISIBLE
+        binding.rvTasksList.visibility = if (show) View.VISIBLE else View.GONE
+        binding.pbLoading.toGone()
     }
 
 }
