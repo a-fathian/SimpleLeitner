@@ -35,4 +35,5 @@ class TasksViewModel(private val databaseHelper: DatabaseHelper): ViewModel() {
     fun getTasks(): LiveData<Resource<List<Task>>> {
         return tasks
     }
+
 }

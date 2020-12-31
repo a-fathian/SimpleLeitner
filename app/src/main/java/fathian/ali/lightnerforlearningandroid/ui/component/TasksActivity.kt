@@ -42,6 +42,7 @@ class TasksActivity : BaseActivity() {
         val layoutManager = LinearLayoutManager(this)
         binding.rvTasksList.layoutManager = layoutManager
         binding.rvTasksList.setHasFixedSize(true)
+        binding.rvTasksList.adapter = TaskAdapter(arrayListOf())
     }
 
     override fun observeViewModel() {
@@ -54,9 +55,25 @@ class TasksActivity : BaseActivity() {
             Status.SUCCESS -> tasks.data?.let { bindListData(tasks = it) }
             Status.ERROR -> {
                 showDataView(false)
-                tasks.errorCode?.let { recipesListViewModel.showToastMessage(it) }
+                tasks.message?.let { toast(it) }
             }
         }
+    }
+
+    private fun bindListData(tasks: List<Task>) {
+        if (!(tasks.isNullOrEmpty())) {
+            tasksAdapter.addData(tasks)
+            tasksAdapter.notifyDataSetChanged()
+            showDataView(true)
+        } else {
+            showDataView(false)
+        }
+    }
+
+    private fun showLoadingView() {
+        binding.pbLoading.toVisible()
+        binding.tvNoData.toGone()
+        binding.rvTasksList.toGone()
     }
 
     private fun showDataView(show: Boolean) {
