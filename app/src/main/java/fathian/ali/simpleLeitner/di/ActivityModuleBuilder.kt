@@ -2,7 +2,7 @@ package fathian.ali.simpleLeitner.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import fathian.ali.simpleLeitner.ui.component.TasksActivity
+import fathian.ali.simpleLeitner.ui.component.tasks.TasksActivity
 
 @Suppress("unused")
 @Module

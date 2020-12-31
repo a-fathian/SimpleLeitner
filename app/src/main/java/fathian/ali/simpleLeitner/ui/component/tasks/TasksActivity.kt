@@ -1,4 +1,4 @@
-package fathian.ali.simpleLeitner.ui.component
+package fathian.ali.simpleLeitner.ui.component.tasks
 
 import android.os.Bundle
 import android.view.View
@@ -42,7 +42,8 @@ class TasksActivity : BaseActivity() {
         val layoutManager = LinearLayoutManager(this)
         binding.rvTasksList.layoutManager = layoutManager
         binding.rvTasksList.setHasFixedSize(true)
-        binding.rvTasksList.adapter = TaskAdapter(arrayListOf())
+        binding.rvTasksList.adapter =
+            TaskAdapter(arrayListOf())
     }
 
     override fun observeViewModel() {

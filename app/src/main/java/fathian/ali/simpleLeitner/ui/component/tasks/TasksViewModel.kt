@@ -1,4 +1,4 @@
-package fathian.ali.simpleLeitner.ui.component
+package fathian.ali.simpleLeitner.ui.component.tasks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

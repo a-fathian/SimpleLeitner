@@ -6,7 +6,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import fathian.ali.simpleLeitner.ui.ViewModelFactory
-import fathian.ali.simpleLeitner.ui.component.TasksViewModel
+import fathian.ali.simpleLeitner.ui.component.tasks.TasksViewModel
 
 /**
  * Since dagger

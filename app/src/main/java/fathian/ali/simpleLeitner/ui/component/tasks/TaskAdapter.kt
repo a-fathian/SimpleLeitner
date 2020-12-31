@@ -1,4 +1,4 @@
-package fathian.ali.simpleLeitner.ui.component
+package fathian.ali.simpleLeitner.ui.component.tasks
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -22,7 +22,9 @@ class TaskAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val itemBinding =
             TaskItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TaskViewHolder(itemBinding)
+        return TaskViewHolder(
+            itemBinding
+        )
     }
 
 
