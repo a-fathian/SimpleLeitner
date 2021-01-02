@@ -86,7 +86,7 @@ class TasksActivity : BaseActivity() {
         binding.pbLoading.toGone()
     }
 
-    fun addTask(view: View) {
+    fun navigateToAddEditTask(view: View) {
         Intent(this, AddEditActivity::class.java).also {
             startActivity(it)
         }
