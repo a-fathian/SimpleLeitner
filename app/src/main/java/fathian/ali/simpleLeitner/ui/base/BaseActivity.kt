@@ -5,11 +5,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import dagger.android.AndroidInjection
 
-/**
- * Created by AhmedEltaher
- */
-
-
 abstract class BaseActivity : AppCompatActivity() {
 
     protected abstract fun initializeViewModel()

@@ -1,6 +1,8 @@
 package fathian.ali.simpleLeitner.ui.component.tasks
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,8 +12,11 @@ import fathian.ali.simpleLeitner.data.Status
 import fathian.ali.simpleLeitner.data.local.entity.Task
 import fathian.ali.simpleLeitner.databinding.TasksActivityBinding
 import fathian.ali.simpleLeitner.ui.base.BaseActivity
+import fathian.ali.simpleLeitner.ui.component.addedit.AddEditActivity
 import fathian.ali.simpleLeitner.utils.observe
-import fathian.ali.simpleLeitner.utils.*
+import fathian.ali.simpleLeitner.utils.toGone
+import fathian.ali.simpleLeitner.utils.toVisible
+import fathian.ali.simpleLeitner.utils.toast
 import javax.inject.Inject
 
 class TasksActivity : BaseActivity() {
@@ -23,7 +28,7 @@ class TasksActivity : BaseActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var tasksAdapter: TaskAdapter
+    // private lateinit var tasksAdapter: TaskAdapter
 
     override fun initializeViewModel() {
         tasksListViewModel = viewModelFactory.create(TasksViewModel::class.java)
@@ -42,18 +47,17 @@ class TasksActivity : BaseActivity() {
         val layoutManager = LinearLayoutManager(this)
         binding.rvTasksList.layoutManager = layoutManager
         binding.rvTasksList.setHasFixedSize(true)
-        binding.rvTasksList.adapter =
-            TaskAdapter(arrayListOf())
     }
 
     override fun observeViewModel() {
-        observe(tasksListViewModel.getTasks(), ::handleTaskList)
+        observe(tasksListViewModel.tasks, ::handleTaskList)
     }
 
     private fun handleTaskList(tasks: Resource<List<Task>>) {
+        Log.d(javaClass.simpleName, "handleTaskList")
         when (tasks.status) {
             Status.LOADING -> showLoadingView()
-            Status.SUCCESS -> tasks.data?.let { bindListData(tasks = it) }
+            Status.SUCCESS -> tasks.data?.let { bindListData(it) }
             Status.ERROR -> {
                 showDataView(false)
                 tasks.message?.let { toast(it) }
@@ -63,8 +67,7 @@ class TasksActivity : BaseActivity() {
 
     private fun bindListData(tasks: List<Task>) {
         if (!(tasks.isNullOrEmpty())) {
-            tasksAdapter.addData(tasks)
-            tasksAdapter.notifyDataSetChanged()
+            binding.rvTasksList.adapter = TaskAdapter(tasks as ArrayList<Task>)
             showDataView(true)
         } else {
             showDataView(false)
@@ -81,6 +84,12 @@ class TasksActivity : BaseActivity() {
         binding.tvNoData.visibility = if (show) View.GONE else View.VISIBLE
         binding.rvTasksList.visibility = if (show) View.VISIBLE else View.GONE
         binding.pbLoading.toGone()
+    }
+
+    fun addTask(view: View) {
+        Intent(this, AddEditActivity::class.java).also {
+            startActivity(it)
+        }
     }
 
 }

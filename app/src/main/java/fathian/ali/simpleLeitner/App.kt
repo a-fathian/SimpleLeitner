@@ -6,6 +6,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import fathian.ali.simpleLeitner.di.DaggerAppComponent
+import timber.log.Timber
 import javax.inject.Inject
 
 open class App : MultiDexApplication(), HasAndroidInjector {
@@ -19,6 +20,9 @@ open class App : MultiDexApplication(), HasAndroidInjector {
         super.onCreate()
         context = applicationContext
         initDagger()
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 
     open fun initDagger() {

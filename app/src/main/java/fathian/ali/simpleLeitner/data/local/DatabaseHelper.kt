@@ -9,6 +9,8 @@ interface DatabaseHelper {
 
     suspend fun insertAll(tasks: List<Task>)
 
+    suspend fun insert(task: Task)
+
     suspend fun delete(task: Task)
 
 }

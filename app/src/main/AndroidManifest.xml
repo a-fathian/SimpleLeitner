@@ -3,14 +3,15 @@
     package="fathian.ali.simpleLeitner">
 
     <application
-        android:name="fathian.ali.simpleLeitner.App"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LightnerForLearningAndroid">
-        <activity android:name="fathian.ali.simpleLeitner.ui.component.tasks.TasksActivity">
+        android:theme="@style/Theme.SimpleLeitner">
+        <activity android:name=".ui.component.addedit.AddEditActivity"></activity>
+        <activity android:name=".ui.component.tasks.TasksActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

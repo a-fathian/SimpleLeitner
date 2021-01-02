@@ -3,4 +3,7 @@
     <string name="no_data">No Data</string>
     <string name="tasks">Tasks</string>
     <string name="add_new_task">Add new task</string>
+    <string name="new_task">New Subject</string>
+    <string name="description">description</string>
+    <string name="add_task">Add task</string>
 </resources>

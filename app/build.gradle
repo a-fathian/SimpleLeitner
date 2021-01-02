@@ -9,7 +9,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "fathian.ali.lightnerforlearningandroid"
+        applicationId "fathian.ali.simpleLeitner"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
@@ -66,4 +66,7 @@ dependencies {
     // Architecture components
     implementation "android.arch.lifecycle:extensions:$architectureLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$architectureLifecycleVersion"
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:$timberVersion"
 }

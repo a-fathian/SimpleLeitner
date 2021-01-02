@@ -30,4 +30,5 @@ ext {
     multiDexVersion = '2.0.1'
     roomVersion = '2.2.6'
     architectureLifecycleVersion = '2.2.0'
+    timberVersion = '4.7.1'
 }

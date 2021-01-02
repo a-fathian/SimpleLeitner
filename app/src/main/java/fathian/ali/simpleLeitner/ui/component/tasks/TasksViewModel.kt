@@ -10,9 +10,9 @@ import fathian.ali.simpleLeitner.data.local.entity.Task
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class TasksViewModel @Inject constructor(private val databaseHelper: DatabaseHelper): ViewModel() {
+class TasksViewModel @Inject constructor(private val databaseHelper: DatabaseHelper) : ViewModel() {
 
-    private val tasks = MutableLiveData<Resource<List<Task>>>()
+    val tasks = MutableLiveData<Resource<List<Task>>>()
 
     init {
         fetchTasks()
@@ -20,17 +20,20 @@ class TasksViewModel @Inject constructor(private val databaseHelper: DatabaseHel
 
     private fun fetchTasks() {
         viewModelScope.launch {
-            tasks.postValue(Resource.loading(null))
+            tasks.value = Resource.loading(null)
+            // delay(2000L)
             try {
-                val savedTasks = databaseHelper.getTasks()
-                tasks.postValue(Resource.success(savedTasks))
+                databaseHelper.getTasks().collect {
+                    tasks.value = Resource.success(it)
+                }
             } catch (e: Exception) {
-                tasks.postValue(Resource.error("Something went wrong", null))
+                tasks.value = Resource.error("Something went wrong", null)
             }
         }
     }
 
     fun getTasks(): LiveData<Resource<List<Task>>> {
+        fetchTasks()
         return tasks
     }
 
