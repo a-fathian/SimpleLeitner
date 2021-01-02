@@ -1,6 +1,5 @@
 package fathian.ali.simpleLeitner.ui.component.tasks
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,18 +22,12 @@ class TasksViewModel @Inject constructor(private val databaseHelper: DatabaseHel
             tasks.value = Resource.loading(null)
             // delay(2000L)
             try {
-                databaseHelper.getTasks().collect {
-                    tasks.value = Resource.success(it)
-                }
+                val savedTasks = databaseHelper.getTasks()
+                tasks.value = Resource.success(savedTasks)
             } catch (e: Exception) {
                 tasks.value = Resource.error("Something went wrong", null)
             }
         }
-    }
-
-    fun getTasks(): LiveData<Resource<List<Task>>> {
-        fetchTasks()
-        return tasks
     }
 
 }
